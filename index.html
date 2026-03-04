@@ -10,185 +10,189 @@
     <style>
         body {
             font-family: 'Hind Siliguri', sans-serif;
-            background-color: #f7fee7;
+            background-color: #f8fafc;
             scroll-behavior: smooth;
         }
         .ramadan-header {
-            background: linear-gradient(135deg, #064e3b 0%, #14532d 100%);
-            transition: background 2s ease-in-out;
+            background: linear-gradient(135deg, #052e16 0%, #064e3b 50%, #065f46 100%);
+            position: relative;
+            transition: all 1s ease;
         }
-        .night-header {
+        .night-mode-header {
             background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%) !important;
         }
-        .glass-panel {
-            background: rgba(255, 255, 255, 0.94);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+        .islamic-pattern {
+            background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M40 0l8.342 25.674h26.984l-21.83 15.86 8.342 25.673-21.838-15.863-21.838 15.863 8.342-25.673-21.83-15.86h26.984z' fill='%23fbbf24' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
         }
         
-        /* Premium Table Highlighting */
-        .highlight-gold {
-            background-color: #ffffff !important;
-            border: 3px solid #f59e0b !important;
-            transform: scale(1.03);
-            z-index: 40;
-            box-shadow: 0 0 35px rgba(245, 158, 11, 0.4);
-            position: relative;
+        /* Premium Dashboard Cards */
+        .card-sehri {
+            background: linear-gradient(135deg, #ecfdf5, #ffffff);
+            border: 2px solid #10b981;
+            border-bottom: 8px solid #10b981;
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.15);
         }
-        .highlight-gold::after {
-            content: "চলমান";
-            position: absolute;
-            right: -10px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: #f59e0b;
-            color: white;
-            font-size: 10px;
-            font-weight: bold;
-            padding: 2px 8px;
-            border-radius: 4px;
-            box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+        .card-iftar {
+            background: linear-gradient(135deg, #fff7ed, #ffffff);
+            border: 2px solid #f97316;
+            border-bottom: 8px solid #f97316;
+            box-shadow: 0 10px 30px rgba(249, 115, 22, 0.15);
         }
 
-        /* Colorful Section Themes */
-        .rahmat-theme { background-color: #f0fdf4; border-left: 6px solid #22c55e; }
-        .maghfirat-theme { background-color: #eff6ff; border-left: 6px solid #3b82f6; }
-        .najat-theme { background-color: #fffaf5; border-left: 6px solid #f97316; }
+        /* Full Table Color Themes */
+        .rahmat-full { background-color: #dcfce7 !important; border-bottom: 1px solid #b9f6ca; }
+        .maghfirat-full { background-color: #dbeafe !important; border-bottom: 1px solid #bbdefb; }
+        .najat-full { background-color: #ffedd5 !important; border-bottom: 1px solid #ffcc80; }
         
         .past-row {
-            opacity: 0.35;
-            filter: grayscale(0.9);
-            border-left: 6px solid #94a3b8 !important;
+            opacity: 0.3 !important;
+            filter: grayscale(1);
         }
 
-        /* Sky & Animations */
+        /* Beautiful Today Highlight */
+        .highlight-today {
+            background: #ffffff !important;
+            border: 4px solid #f59e0b !important;
+            transform: scale(1.03);
+            z-index: 50;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(245, 158, 11, 0.4) !important;
+            border-radius: 1.5rem !important;
+        }
+        .highlight-today::after {
+            content: "আজ";
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(135deg, #d97706, #f59e0b);
+            color: white;
+            font-size: 10px;
+            font-weight: 800;
+            padding: 4px 12px;
+            border-radius: 99px;
+            box-shadow: 0 4px 10px rgba(217, 119, 6, 0.3);
+        }
+
         @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0); }
-            50% { transform: translateY(-15px) rotate(5deg); }
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
-        .float-lantern { animation: float 5s ease-in-out infinite; }
-        
-        .islamic-pattern {
-            background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M40 0l8.342 25.674h26.984l-21.83 15.86 8.342 25.673-21.838-15.863-21.838 15.863 8.342-25.673-21.83-15.86h26.984z' fill='%23ffffff' fill-opacity='0.04' fill-rule='evenodd'/%3E%3C/svg%3E");
-        }
+        .float-icon { animation: float 5s ease-in-out infinite; }
 
         .no-scrollbar::-webkit-scrollbar { display: none; }
 
-        /* Sky Arc Positioning */
-        .celestial-body {
-            position: absolute;
-            transition: all 1.5s cubic-bezier(0.4, 0, 0.2, 1);
-            filter: drop-shadow(0 0 15px currentColor);
+        .credit-badge {
+            background: white;
+            border: 2px solid #e2e8f0;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .credit-badge:hover {
+            border-color: #f59e0b;
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
         }
     </style>
 </head>
 <body class="text-slate-800 transition-colors duration-1000">
 
-    <!-- Hero Header with Sky Tracker -->
-    <header id="main-header" class="ramadan-header text-white relative overflow-hidden py-16 px-6 shadow-2xl">
+    <!-- Header Section -->
+    <header id="main-header" class="ramadan-header text-white pt-8 pb-24 md:pt-12 md:pb-32 px-4 text-center shadow-xl">
         <div class="absolute inset-0 islamic-pattern"></div>
         
-        <!-- Animated Lanterns -->
-        <div class="absolute top-4 left-10 float-lantern opacity-40 hidden md:block">
-            <svg width="40" height="60" viewBox="0 0 24 36" fill="gold"><path d="M12 0L15 4H9L12 0ZM6 6H18V28H6V6ZM12 36L9 32H15L12 36Z"/></svg>
-        </div>
-        <div class="absolute top-10 right-10 float-lantern opacity-40 hidden md:block" style="animation-delay: -2s;">
-            <svg width="30" height="50" viewBox="0 0 24 36" fill="gold"><path d="M12 0L15 4H9L12 0ZM6 6H18V28H6V6ZM12 36L9 32H15L12 36Z"/></svg>
-        </div>
-
-        <div class="max-w-4xl mx-auto relative z-10 text-center">
-            <!-- Sky Object -->
-            <div id="sky-arc" class="h-24 relative mb-4">
-                <div id="sky-obj" class="celestial-body text-6xl" style="left: 50%; top: 50%; transform: translate(-50%, -50%);">☀️</div>
-            </div>
-
-            <div class="inline-flex items-center space-x-2 px-6 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-[10px] font-bold mb-6 uppercase tracking-[0.4em]">
-                <span>🕌 মানিকগঞ্জ</span>
-                <span class="opacity-50">•</span>
+        <div class="max-w-4xl mx-auto relative z-10">
+            <!-- Dynamic Sky Icon -->
+            <div id="sky-obj" class="text-5xl md:text-6xl mb-4 float-icon drop-shadow-2xl">☀️</div>
+            
+            <div class="inline-flex items-center space-x-2 px-5 py-1.5 rounded-full bg-black/20 backdrop-blur-md border border-white/10 text-[10px] md:text-[12px] font-bold mb-4 uppercase tracking-[0.3em]">
+                <span class="text-yellow-400">🕌 মানিকগঞ্জ </span>
+                <span class="opacity-40">|</span>
                 <span>১৪৪৭ হিজরী</span>
             </div>
+            <h1 class="text-4xl md:text-6xl font-black mb-8 md:mb-12 tracking-tight drop-shadow-lg">মাহে রমজান ২০২৬</h1>
             
-            <h1 class="text-5xl md:text-7xl font-black mb-10 drop-shadow-xl tracking-tight leading-tight">মাহে রমজান ২০২৬</h1>
-            
-            <!-- Beautiful Countdown Card -->
-            <div id="timer-card" class="glass-panel rounded-[3rem] p-10 text-slate-900 shadow-2xl max-w-xl mx-auto relative border border-white/40">
+            <!-- Main Timer Card -->
+            <div class="bg-white rounded-[2.5rem] p-8 md:p-12 text-slate-900 shadow-2xl max-w-sm md:max-w-md mx-auto relative mb-[-60px] md:mb-[-50px] border border-white/50">
                 <div id="eid-ribbon" class="hidden absolute -top-5 left-1/2 -translate-x-1/2 bg-red-600 text-white px-8 py-2 rounded-full text-xs font-bold shadow-xl animate-bounce">
                     🌙 আগামীকাল পবিত্র ঈদুল ফিতর!
                 </div>
-                
-                <p id="countdown-label" class="text-xs font-bold uppercase tracking-[0.5em] text-emerald-800 mb-4 opacity-70">ইফতারের বাকি</p>
-                <div id="main-countdown" class="text-6xl md:text-7xl font-black tabular-nums tracking-tighter mb-6 bg-clip-text text-transparent bg-gradient-to-b from-slate-900 to-slate-600">০০:০০:০০</div>
-                
-                <div class="flex justify-center">
-                    <div class="inline-flex items-center space-x-3 bg-emerald-100/50 text-emerald-800 px-8 py-2 rounded-full font-bold text-sm">
-                        <span class="opacity-50">টার্গেট:</span>
-                        <span id="target-time-label">--:--</span>
-                    </div>
+                <p id="countdown-label" class="text-[10px] md:text-[12px] font-extrabold uppercase tracking-[0.5em] text-slate-400 mb-3">ইফতারের বাকি সময়</p>
+                <div id="main-countdown" class="text-5xl md:text-7xl font-black tabular-nums tracking-tighter text-slate-800 mb-3">০০:০০:০০</div>
+                <div class="inline-flex items-center space-x-2 bg-emerald-50 text-emerald-700 px-5 py-1.5 rounded-full text-[11px] md:text-[13px] font-black border border-emerald-100/50">
+                    <span class="opacity-50 italic">টার্গেট:</span>
+                    <span id="target-time-label">--:--</span>
                 </div>
             </div>
         </div>
     </header>
 
-    <main class="max-w-5xl mx-auto px-4 -mt-12 relative z-20 pb-24">
+    <main class="max-w-4xl mx-auto px-4 mt-24 md:mt-28 pb-20">
         
-        <!-- High-End Summary Dashboard -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-            <div class="bg-white p-8 rounded-[2.5rem] shadow-xl border-b-[12px] border-emerald-500 flex items-center justify-between transition-all hover:scale-[1.02]">
+        <!-- Summary Cards (Restored Beautiful Style) -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-10">
+            <div class="card-sehri p-6 rounded-[2.5rem] flex items-center justify-between transition-all hover:scale-[1.03]">
                 <div>
-                    <p class="text-slate-400 text-xs font-bold uppercase tracking-widest mb-2">সেহরির শেষ সময়</p>
-                    <p id="dash-sehri" class="text-4xl font-black text-emerald-600">--:--</p>
+                    <p class="text-emerald-800/60 text-[10px] font-bold uppercase tracking-widest mb-1">সেহরির শেষ সময়</p>
+                    <p id="dash-sehri" class="text-2xl md:text-3xl font-black text-emerald-700 tracking-tight">--:--</p>
                 </div>
-                <div class="text-5xl bg-emerald-50 p-4 rounded-3xl">🌄</div>
+                <div class="w-14 h-14 bg-emerald-500 text-white rounded-3xl flex items-center justify-center text-3xl shadow-lg">🌄</div>
             </div>
-            <div class="bg-white p-8 rounded-[2.5rem] shadow-xl border-b-[12px] border-orange-500 flex items-center justify-between transition-all hover:scale-[1.02]">
+            <div class="card-iftar p-6 rounded-[2.5rem] flex items-center justify-between transition-all hover:scale-[1.03]">
                 <div>
-                    <p class="text-slate-400 text-xs font-bold uppercase tracking-widest mb-2">ইফতারের সময়</p>
-                    <p id="dash-iftar" class="text-4xl font-black text-orange-600">--:--</p>
+                    <p class="text-orange-800/60 text-[10px] font-bold uppercase tracking-widest mb-1">ইফতারের সময়</p>
+                    <p id="dash-iftar" class="text-2xl md:text-3xl font-black text-orange-700 tracking-tight">--:--</p>
                 </div>
-                <div class="text-5xl bg-orange-50 p-4 rounded-3xl">🌙</div>
+                <div class="w-14 h-14 bg-orange-500 text-white rounded-3xl flex items-center justify-center text-3xl shadow-lg">🌙</div>
             </div>
         </div>
 
-        <!-- Legend Tags -->
-        <div class="flex flex-wrap justify-center gap-4 mb-10">
-            <div class="px-6 py-2 rounded-full bg-green-500 text-white text-xs font-bold shadow-lg shadow-green-200">রহমত (১-১০)</div>
-            <div class="px-6 py-2 rounded-full bg-blue-500 text-white text-xs font-bold shadow-lg shadow-blue-200">মাগফিরাত (১১-২০)</div>
-            <div class="px-6 py-2 rounded-full bg-orange-500 text-white text-xs font-bold shadow-lg shadow-orange-200">নাজাত (২১-৩০)</div>
+        <!-- Legend -->
+        <div class="flex flex-wrap justify-center gap-2 mb-8">
+            <span class="px-4 py-1.5 rounded-full bg-emerald-500 text-white text-[10px] font-bold shadow-lg shadow-emerald-100">রহমত</span>
+            <span class="px-4 py-1.5 rounded-full bg-blue-500 text-white text-[10px] font-bold shadow-lg shadow-blue-100">মাগফিরাত</span>
+            <span class="px-4 py-1.5 rounded-full bg-orange-500 text-white text-[10px] font-bold shadow-lg shadow-orange-100">নাজাত</span>
         </div>
 
-        <!-- Beautiful Schedule Table -->
-        <div class="bg-white rounded-[3.5rem] shadow-2xl overflow-hidden border border-slate-100">
+        <!-- Schedule Table -->
+        <div class="bg-white rounded-[2rem] md:rounded-[3rem] shadow-2xl overflow-hidden border border-slate-100">
             <div class="overflow-x-auto no-scrollbar">
-                <table class="w-full text-left border-collapse">
-                    <thead class="bg-slate-900 text-white text-[10px] font-bold uppercase tracking-[0.3em]">
+                <table class="w-full text-left border-collapse min-w-[360px]">
+                    <thead class="bg-slate-900 text-white text-[10px] md:text-[12px] font-black uppercase tracking-[0.2em]">
                         <tr>
-                            <th class="p-8">রমজান</th>
-                            <th class="p-8">তারিখ</th>
-                            <th class="p-8 text-emerald-400">সেহরি</th>
-                            <th class="p-8 text-slate-500">ফজর</th>
-                            <th class="p-8 text-orange-400">ইফতার</th>
+                            <th class="p-5 md:p-7">রমজান</th>
+                            <th class="p-5 md:p-7">তারিখ</th>
+                            <th class="p-5 md:p-7 text-emerald-400">সেহরি</th>
+                            <th class="p-5 md:p-7">ফজর</th>
+                            <th class="p-5 md:p-7 text-orange-400">ইফতার</th>
                         </tr>
                     </thead>
-                    <tbody id="schedule-table-body" class="text-lg">
-                        <!-- Dynamic Rows -->
+                    <tbody id="schedule-table-body" class="text-sm md:text-base font-bold">
+                        <!-- Content -->
                     </tbody>
                 </table>
             </div>
         </div>
 
-        <footer class="mt-20 text-center opacity-40">
-            <p class="text-emerald-900 text-sm font-bold tracking-widest uppercase">© ২০২৬ মানিকগঞ্জ জেলা রমজান ক্যালেন্ডার</p>
-            <p class="text-[10px] uppercase mt-2">ইসলামিক ফাউন্ডেশন বাংলাদেশ কর্তৃক অনুমোদিত</p>
+        <footer class="mt-20 text-center space-y-8">
+            <p class="text-emerald-900 text-[10px] font-bold tracking-widest uppercase opacity-30">© ২০২৬ মানিকগঞ্জ জেলা রমজান ক্যালেন্ডার</p>
+            
+            <!-- Developed Credit like Aishorjo -->
+            <div class="flex justify-center pb-10">
+                <div class="credit-badge px-10 py-5 rounded-[2.5rem] inline-flex items-center space-x-4">
+                    <span class="text-[12px] font-bold text-slate-400 uppercase tracking-widest">Developed by</span>
+                    <span class="w-[2px] h-5 bg-slate-200"></span>
+                    <span class="text-[20px] font-black bg-clip-text text-transparent bg-gradient-to-r from-emerald-700 via-teal-600 to-orange-600 tracking-tight">Aishorjo</span>
+                </div>
+            </div>
         </footer>
     </main>
 
-    <!-- Full Celebration Overlay for Eid -->
-    <div id="eid-overlay" class="hidden fixed inset-0 z-[100] bg-amber-50 flex flex-col items-center justify-center text-center p-12 overflow-hidden">
-        <div class="absolute inset-0 islamic-pattern opacity-10"></div>
-        <div class="text-[12rem] mb-10 float-lantern">🌙</div>
-        <h1 class="text-8xl md:text-[10rem] font-black text-amber-600 mb-6 drop-shadow-2xl">ঈদ মোবারক</h1>
-        <p class="text-3xl text-amber-800 font-bold mb-16 tracking-widest opacity-70 uppercase">পবিত্র ঈদুল ফিতর ২০২৬</p>
-        <button onclick="document.getElementById('eid-overlay').classList.add('hidden')" class="relative z-10 bg-amber-600 text-white px-20 py-6 rounded-full font-black text-2xl shadow-2xl hover:bg-amber-700 transition transform hover:scale-105">প্রবেশ করুন</button>
+    <!-- Eid Screen -->
+    <div id="eid-overlay" class="hidden fixed inset-0 z-[100] bg-white flex flex-col items-center justify-center text-center p-10">
+        <div class="text-[10rem] md:text-[14rem] mb-10 float-icon">🌙</div>
+        <h1 class="text-6xl md:text-[10rem] font-black text-transparent bg-clip-text bg-gradient-to-b from-amber-600 to-orange-700 mb-6 drop-shadow-2xl">ঈদ মোবারক</h1>
+        <p class="text-2xl md:text-3xl text-slate-500 font-bold mb-16 tracking-widest uppercase">পবিত্র ঈদুল ফিতর ২০২৬</p>
+        <button onclick="document.getElementById('eid-overlay').classList.add('hidden')" class="bg-amber-600 text-white px-20 md:px-28 py-6 rounded-full font-black text-xl md:text-2xl shadow-3xl hover:scale-110 active:scale-95 transition-all">প্রবেশ করুন</button>
     </div>
 
     <script>
@@ -236,19 +240,23 @@
             const tbody = document.getElementById('schedule-table-body');
             tbody.innerHTML = '';
             ramadanData.forEach(item => {
-                const rowDate = new Date(`${item.d}, 2026`).toDateString();
-                const isToday = rowDate === todayStr;
+                const rDate = new Date(`${item.d}, 2026`).toDateString();
+                const isToday = rDate === todayStr;
                 const isPast = new Date(`${item.d}, 2026`) < new Date(todayStr);
                 
                 const tr = document.createElement('tr');
-                let theme = item.r <= 10 ? 'rahmat-theme' : (item.r <= 20 ? 'maghfirat-theme' : 'najat-theme');
-                tr.className = `border-b border-slate-50 transition-all ${theme} ${isPast ? 'past-row' : ''} ${isToday ? 'highlight-gold font-bold' : ''}`;
+                let themeClass = "";
+                if (item.r <= 10) themeClass = "rahmat-full";
+                else if (item.r <= 20) themeClass = "maghfirat-full";
+                else themeClass = "najat-full";
+
+                tr.className = `transition-all ${themeClass} ${isPast ? 'past-row' : ''} ${isToday ? 'highlight-today' : ''}`;
                 tr.innerHTML = `
-                    <td class="p-8 font-bold text-slate-400">${toBn(item.r)}</td>
-                    <td class="p-8 font-bold text-slate-800">${toBn(item.d)}</td>
-                    <td class="p-8 font-black text-emerald-600">${toBn(item.s)}</td>
-                    <td class="p-8 text-slate-300">${toBn(item.f)}</td>
-                    <td class="p-8 font-black text-orange-600">${toBn(item.i)}</td>
+                    <td class="p-5 md:p-7 text-center font-black text-slate-500">${toBn(item.r)}</td>
+                    <td class="p-5 md:p-7 font-black text-slate-800">${toBn(item.d)}</td>
+                    <td class="p-5 md:p-7 font-black text-emerald-700">${toBn(item.s)}</td>
+                    <td class="p-5 md:p-7 text-slate-400 font-medium">${toBn(item.f)}</td>
+                    <td class="p-5 md:p-7 font-black text-orange-700">${toBn(item.i)}</td>
                 `;
                 tbody.appendChild(tr);
             });
@@ -258,7 +266,6 @@
             const now = new Date();
             const todayStr = now.toDateString();
             
-            // Re-render table if day changed
             if (window.lastDay !== todayStr) {
                 renderTable(todayStr);
                 window.lastDay = todayStr;
@@ -267,8 +274,7 @@
             const eidDate = new Date("March 21, 2026");
             if (now >= eidDate && !window.eidPlayed) {
                 document.getElementById('eid-overlay').classList.remove('hidden');
-                document.getElementById('main-header').classList.add('night-header');
-                confetti({ particleCount: 300, spread: 150, origin: { y: 0.7 } });
+                confetti({ particleCount: 500, spread: 200, origin: { y: 0.6 } });
                 window.eidPlayed = true;
             }
 
@@ -281,30 +287,25 @@
                 document.getElementById('dash-sehri').innerText = toBn(today.s);
                 document.getElementById('dash-iftar').innerText = toBn(today.i);
 
-                // Sky Icon Logic
-                const skyObj = document.getElementById('sky-obj');
                 const header = document.getElementById('main-header');
-                
+                const skyObj = document.getElementById('sky-obj');
                 if (now >= sT && now < iT) {
                     skyObj.innerText = "☀️";
-                    skyObj.style.color = "#fbbf24";
-                    header.classList.remove('night-header');
+                    header.classList.remove('night-mode-header');
                 } else {
                     skyObj.innerText = "🌙";
-                    skyObj.style.color = "#f1f5f9";
-                    header.classList.add('night-header');
+                    header.classList.add('night-mode-header');
                 }
 
                 let target = null, label = "";
-                if (now < sT) { target = sT; label = "সেহরির বাকি"; }
-                else if (now < iT) { target = iT; label = "ইফতারের বাকি"; }
+                if (now < sT) { target = sT; label = "সেহরির বাকি সময়"; }
+                else if (now < iT) { target = iT; label = "ইফতারের বাকি সময়"; }
                 else {
-                    const next = ramadanData[ramadanData.indexOf(today) + 1];
-                    if (next) { target = getD(next.d, next.s, false); label = "পরবর্তী সেহরি"; }
-                    else { 
-                        target = eidDate; label = "ঈদের খুশির দিন";
-                        document.getElementById('eid-ribbon').classList.remove('hidden');
-                    }
+                    const nextIdx = ramadanData.indexOf(today) + 1;
+                    if (ramadanData[nextIdx]) { 
+                        target = getD(ramadanData[nextIdx].d, ramadanData[nextIdx].s, false); 
+                        label = "পরবর্তী সেহরি"; 
+                    } else { target = eidDate; label = "ঈদের খুশির দিন"; document.getElementById('eid-ribbon').classList.remove('hidden'); }
                 }
 
                 if (target) {
@@ -317,7 +318,6 @@
                     document.getElementById('target-time-label').innerText = toBn(target.toLocaleTimeString('en-US', {hour:'2-digit', minute:'2-digit'}));
                 }
             } else {
-                // Pre-Ramadan Handling
                 const start = getD(ramadanData[0].d, ramadanData[0].s, false);
                 if (now < start) {
                     const d = start - now;

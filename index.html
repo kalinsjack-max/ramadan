@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>রমজান ২০২৬ সময়সূচী - মানিকগঞ্জ</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Hind Siliguri', sans-serif;
+            background-color: #f7fee7;
+            scroll-behavior: smooth;
+        }
+        .ramadan-header {
+            background: linear-gradient(135deg, #064e3b 0%, #14532d 100%);
+            transition: background 2s ease-in-out;
+        }
+        .night-header {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%) !important;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.94);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        /* Premium Table Highlighting */
+        .highlight-gold {
+            background-color: #ffffff !important;
+            border: 3px solid #f59e0b !important;
+            transform: scale(1.03);
+            z-index: 40;
+            box-shadow: 0 0 35px rgba(245, 158, 11, 0.4);
+            position: relative;
+        }
+        .highlight-gold::after {
+            content: "চলমান";
+            position: absolute;
+            right: -10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #f59e0b;
+            color: white;
+            font-size: 10px;
+            font-weight: bold;
+            padding: 2px 8px;
+            border-radius: 4px;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+        }
+
+        /* Colorful Section Themes */
+        .rahmat-theme { background-color: #f0fdf4; border-left: 6px solid #22c55e; }
+        .maghfirat-theme { background-color: #eff6ff; border-left: 6px solid #3b82f6; }
+        .najat-theme { background-color: #fffaf5; border-left: 6px solid #f97316; }
+        
+        .past-row {
+            opacity: 0.35;
+            filter: grayscale(0.9);
+            border-left: 6px solid #94a3b8 !important;
+        }
+
+        /* Sky & Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0); }
+            50% { transform: translateY(-15px) rotate(5deg); }
+        }
+        .float-lantern { animation: float 5s ease-in-out infinite; }
+        
+        .islamic-pattern {
+            background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M40 0l8.342 25.674h26.984l-21.83 15.86 8.342 25.673-21.838-15.863-21.838 15.863 8.342-25.673-21.83-15.86h26.984z' fill='%23ffffff' fill-opacity='0.04' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+
+        /* Sky Arc Positioning */
+        .celestial-body {
+            position: absolute;
+            transition: all 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+            filter: drop-shadow(0 0 15px currentColor);
+        }
+    </style>
+</head>
+<body class="text-slate-800 transition-colors duration-1000">
+
+    <!-- Hero Header with Sky Tracker -->
+    <header id="main-header" class="ramadan-header text-white relative overflow-hidden py-16 px-6 shadow-2xl">
+        <div class="absolute inset-0 islamic-pattern"></div>
+        
+        <!-- Animated Lanterns -->
+        <div class="absolute top-4 left-10 float-lantern opacity-40 hidden md:block">
+            <svg width="40" height="60" viewBox="0 0 24 36" fill="gold"><path d="M12 0L15 4H9L12 0ZM6 6H18V28H6V6ZM12 36L9 32H15L12 36Z"/></svg>
+        </div>
+        <div class="absolute top-10 right-10 float-lantern opacity-40 hidden md:block" style="animation-delay: -2s;">
+            <svg width="30" height="50" viewBox="0 0 24 36" fill="gold"><path d="M12 0L15 4H9L12 0ZM6 6H18V28H6V6ZM12 36L9 32H15L12 36Z"/></svg>
+        </div>
+
+        <div class="max-w-4xl mx-auto relative z-10 text-center">
+            <!-- Sky Object -->
+            <div id="sky-arc" class="h-24 relative mb-4">
+                <div id="sky-obj" class="celestial-body text-6xl" style="left: 50%; top: 50%; transform: translate(-50%, -50%);">☀️</div>
+            </div>
+
+            <div class="inline-flex items-center space-x-2 px-6 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-[10px] font-bold mb-6 uppercase tracking-[0.4em]">
+                <span>🕌 মানিকগঞ্জ</span>
+                <span class="opacity-50">•</span>
+                <span>১৪৪৭ হিজরী</span>
+            </div>
+            
+            <h1 class="text-5xl md:text-7xl font-black mb-10 drop-shadow-xl tracking-tight leading-tight">মাহে রমজান ২০২৬</h1>
+            
+            <!-- Beautiful Countdown Card -->
+            <div id="timer-card" class="glass-panel rounded-[3rem] p-10 text-slate-900 shadow-2xl max-w-xl mx-auto relative border border-white/40">
+                <div id="eid-ribbon" class="hidden absolute -top-5 left-1/2 -translate-x-1/2 bg-red-600 text-white px-8 py-2 rounded-full text-xs font-bold shadow-xl animate-bounce">
+                    🌙 আগামীকাল পবিত্র ঈদুল ফিতর!
+                </div>
+                
+                <p id="countdown-label" class="text-xs font-bold uppercase tracking-[0.5em] text-emerald-800 mb-4 opacity-70">ইফতারের বাকি</p>
+                <div id="main-countdown" class="text-6xl md:text-7xl font-black tabular-nums tracking-tighter mb-6 bg-clip-text text-transparent bg-gradient-to-b from-slate-900 to-slate-600">০০:০০:০০</div>
+                
+                <div class="flex justify-center">
+                    <div class="inline-flex items-center space-x-3 bg-emerald-100/50 text-emerald-800 px-8 py-2 rounded-full font-bold text-sm">
+                        <span class="opacity-50">টার্গেট:</span>
+                        <span id="target-time-label">--:--</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 -mt-12 relative z-20 pb-24">
+        
+        <!-- High-End Summary Dashboard -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+            <div class="bg-white p-8 rounded-[2.5rem] shadow-xl border-b-[12px] border-emerald-500 flex items-center justify-between transition-all hover:scale-[1.02]">
+                <div>
+                    <p class="text-slate-400 text-xs font-bold uppercase tracking-widest mb-2">সেহরির শেষ সময়</p>
+                    <p id="dash-sehri" class="text-4xl font-black text-emerald-600">--:--</p>
+                </div>
+                <div class="text-5xl bg-emerald-50 p-4 rounded-3xl">🌄</div>
+            </div>
+            <div class="bg-white p-8 rounded-[2.5rem] shadow-xl border-b-[12px] border-orange-500 flex items-center justify-between transition-all hover:scale-[1.02]">
+                <div>
+                    <p class="text-slate-400 text-xs font-bold uppercase tracking-widest mb-2">ইফতারের সময়</p>
+                    <p id="dash-iftar" class="text-4xl font-black text-orange-600">--:--</p>
+                </div>
+                <div class="text-5xl bg-orange-50 p-4 rounded-3xl">🌙</div>
+            </div>
+        </div>
+
+        <!-- Legend Tags -->
+        <div class="flex flex-wrap justify-center gap-4 mb-10">
+            <div class="px-6 py-2 rounded-full bg-green-500 text-white text-xs font-bold shadow-lg shadow-green-200">রহমত (১-১০)</div>
+            <div class="px-6 py-2 rounded-full bg-blue-500 text-white text-xs font-bold shadow-lg shadow-blue-200">মাগফিরাত (১১-২০)</div>
+            <div class="px-6 py-2 rounded-full bg-orange-500 text-white text-xs font-bold shadow-lg shadow-orange-200">নাজাত (২১-৩০)</div>
+        </div>
+
+        <!-- Beautiful Schedule Table -->
+        <div class="bg-white rounded-[3.5rem] shadow-2xl overflow-hidden border border-slate-100">
+            <div class="overflow-x-auto no-scrollbar">
+                <table class="w-full text-left border-collapse">
+                    <thead class="bg-slate-900 text-white text-[10px] font-bold uppercase tracking-[0.3em]">
+                        <tr>
+                            <th class="p-8">রমজান</th>
+                            <th class="p-8">তারিখ</th>
+                            <th class="p-8 text-emerald-400">সেহরি</th>
+                            <th class="p-8 text-slate-500">ফজর</th>
+                            <th class="p-8 text-orange-400">ইফতার</th>
+                        </tr>
+                    </thead>
+                    <tbody id="schedule-table-body" class="text-lg">
+                        <!-- Dynamic Rows -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <footer class="mt-20 text-center opacity-40">
+            <p class="text-emerald-900 text-sm font-bold tracking-widest uppercase">© ২০২৬ মানিকগঞ্জ জেলা রমজান ক্যালেন্ডার</p>
+            <p class="text-[10px] uppercase mt-2">ইসলামিক ফাউন্ডেশন বাংলাদেশ কর্তৃক অনুমোদিত</p>
+        </footer>
+    </main>
+
+    <!-- Full Celebration Overlay for Eid -->
+    <div id="eid-overlay" class="hidden fixed inset-0 z-[100] bg-amber-50 flex flex-col items-center justify-center text-center p-12 overflow-hidden">
+        <div class="absolute inset-0 islamic-pattern opacity-10"></div>
+        <div class="text-[12rem] mb-10 float-lantern">🌙</div>
+        <h1 class="text-8xl md:text-[10rem] font-black text-amber-600 mb-6 drop-shadow-2xl">ঈদ মোবারক</h1>
+        <p class="text-3xl text-amber-800 font-bold mb-16 tracking-widest opacity-70 uppercase">পবিত্র ঈদুল ফিতর ২০২৬</p>
+        <button onclick="document.getElementById('eid-overlay').classList.add('hidden')" class="relative z-10 bg-amber-600 text-white px-20 py-6 rounded-full font-black text-2xl shadow-2xl hover:bg-amber-700 transition transform hover:scale-105">প্রবেশ করুন</button>
+    </div>
+
+    <script>
+        const ramadanData = [
+            { r: 1, d: "19 Feb", s: "5:13", f: "5:16", i: "5:59" },
+            { r: 2, d: "20 Feb", s: "5:12", f: "5:16", i: "6:00" },
+            { r: 3, d: "21 Feb", s: "5:12", f: "5:15", i: "6:00" },
+            { r: 4, d: "22 Feb", s: "5:11", f: "5:14", i: "6:01" },
+            { r: 5, d: "23 Feb", s: "5:10", f: "5:14", i: "6:01" },
+            { r: 6, d: "24 Feb", s: "5:09", f: "5:13", i: "6:02" },
+            { r: 7, d: "25 Feb", s: "5:09", f: "5:12", i: "6:02" },
+            { r: 8, d: "26 Feb", s: "5:08", f: "5:11", i: "6:03" },
+            { r: 9, d: "27 Feb", s: "5:07", f: "5:10", i: "6:03" },
+            { r: 10, d: "28 Feb", s: "5:06", f: "5:10", i: "6:04" },
+            { r: 11, d: "01 Mar", s: "5:06", f: "5:09", i: "6:04" },
+            { r: 12, d: "02 Mar", s: "5:05", f: "5:08", i: "6:05" },
+            { r: 13, d: "03 Mar", s: "5:04", f: "5:07", i: "6:05" },
+            { r: 14, d: "04 Mar", s: "5:03", f: "5:06", i: "6:06" },
+            { r: 15, d: "05 Mar", s: "5:02", f: "5:05", i: "6:06" },
+            { r: 16, d: "06 Mar", s: "5:01", f: "5:04", i: "6:07" },
+            { r: 17, d: "07 Mar", s: "5:00", f: "5:04", i: "6:07" },
+            { r: 18, d: "08 Mar", s: "4:59", f: "5:03", i: "6:07" },
+            { r: 19, d: "09 Mar", s: "4:58", f: "5:02", i: "6:08" },
+            { r: 20, d: "10 Mar", s: "4:58", f: "5:01", i: "6:08" },
+            { r: 21, d: "11 Mar", s: "4:57", f: "5:00", i: "6:09" },
+            { r: 22, d: "12 Mar", s: "4:56", f: "4:59", i: "6:09" },
+            { r: 23, d: "13 Mar", s: "4:55", f: "4:58", i: "6:10" },
+            { r: 24, d: "14 Mar", s: "4:54", f: "4:57", i: "6:10" },
+            { r: 25, d: "15 Mar", s: "4:53", f: "4:56", i: "6:11" },
+            { r: 26, d: "16 Mar", s: "4:52", f: "4:55", i: "6:11" },
+            { r: 27, d: "17 Mar", s: "4:51", f: "4:54", i: "6:11" },
+            { r: 28, d: "18 Mar", s: "4:50", f: "4:53", i: "6:12" },
+            { r: 29, d: "19 Mar", s: "4:49", f: "4:52", i: "6:12" },
+            { r: 30, d: "20 Mar", s: "4:48", f: "4:51", i: "6:13" }
+        ];
+
+        const bnMap = {'0':'০','1':'১','2':'২','3':'৩','4':'৪','5':'৫','6':'৬','7':'৭','8':'৮','9':'৯'};
+        const toBn = (s) => s ? s.toString().replace(/\d/g, d => bnMap[d]) : "০০:০০";
+
+        function getD(dStr, tStr, pm) {
+            return new Date(`${dStr}, 2026 ${tStr} ${pm ? 'PM' : 'AM'}`);
+        }
+
+        function renderTable(todayStr) {
+            const tbody = document.getElementById('schedule-table-body');
+            tbody.innerHTML = '';
+            ramadanData.forEach(item => {
+                const rowDate = new Date(`${item.d}, 2026`).toDateString();
+                const isToday = rowDate === todayStr;
+                const isPast = new Date(`${item.d}, 2026`) < new Date(todayStr);
+                
+                const tr = document.createElement('tr');
+                let theme = item.r <= 10 ? 'rahmat-theme' : (item.r <= 20 ? 'maghfirat-theme' : 'najat-theme');
+                tr.className = `border-b border-slate-50 transition-all ${theme} ${isPast ? 'past-row' : ''} ${isToday ? 'highlight-gold font-bold' : ''}`;
+                tr.innerHTML = `
+                    <td class="p-8 font-bold text-slate-400">${toBn(item.r)}</td>
+                    <td class="p-8 font-bold text-slate-800">${toBn(item.d)}</td>
+                    <td class="p-8 font-black text-emerald-600">${toBn(item.s)}</td>
+                    <td class="p-8 text-slate-300">${toBn(item.f)}</td>
+                    <td class="p-8 font-black text-orange-600">${toBn(item.i)}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function refresh() {
+            const now = new Date();
+            const todayStr = now.toDateString();
+            
+            // Re-render table if day changed
+            if (window.lastDay !== todayStr) {
+                renderTable(todayStr);
+                window.lastDay = todayStr;
+            }
+
+            const eidDate = new Date("March 21, 2026");
+            if (now >= eidDate && !window.eidPlayed) {
+                document.getElementById('eid-overlay').classList.remove('hidden');
+                document.getElementById('main-header').classList.add('night-header');
+                confetti({ particleCount: 300, spread: 150, origin: { y: 0.7 } });
+                window.eidPlayed = true;
+            }
+
+            let today = ramadanData.find(i => new Date(`${i.d}, 2026`).toDateString() === todayStr);
+
+            if (today) {
+                const sT = getD(today.d, today.s, false);
+                const iT = getD(today.d, today.i, true);
+                
+                document.getElementById('dash-sehri').innerText = toBn(today.s);
+                document.getElementById('dash-iftar').innerText = toBn(today.i);
+
+                // Sky Icon Logic
+                const skyObj = document.getElementById('sky-obj');
+                const header = document.getElementById('main-header');
+                
+                if (now >= sT && now < iT) {
+                    skyObj.innerText = "☀️";
+                    skyObj.style.color = "#fbbf24";
+                    header.classList.remove('night-header');
+                } else {
+                    skyObj.innerText = "🌙";
+                    skyObj.style.color = "#f1f5f9";
+                    header.classList.add('night-header');
+                }
+
+                let target = null, label = "";
+                if (now < sT) { target = sT; label = "সেহরির বাকি"; }
+                else if (now < iT) { target = iT; label = "ইফতারের বাকি"; }
+                else {
+                    const next = ramadanData[ramadanData.indexOf(today) + 1];
+                    if (next) { target = getD(next.d, next.s, false); label = "পরবর্তী সেহরি"; }
+                    else { 
+                        target = eidDate; label = "ঈদের খুশির দিন";
+                        document.getElementById('eid-ribbon').classList.remove('hidden');
+                    }
+                }
+
+                if (target) {
+                    const d = target - now;
+                    const h = Math.floor(d / 3600000);
+                    const m = Math.floor((d % 3600000) / 60000);
+                    const s = Math.floor((d % 60000) / 1000);
+                    document.getElementById('main-countdown').innerText = toBn(`${h.toString().padStart(2,'0')}:${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`);
+                    document.getElementById('countdown-label').innerText = label;
+                    document.getElementById('target-time-label').innerText = toBn(target.toLocaleTimeString('en-US', {hour:'2-digit', minute:'2-digit'}));
+                }
+            } else {
+                // Pre-Ramadan Handling
+                const start = getD(ramadanData[0].d, ramadanData[0].s, false);
+                if (now < start) {
+                    const d = start - now;
+                    const h = Math.floor(d / 3600000);
+                    const m = Math.floor((d % 3600000) / 60000);
+                    const s = Math.floor((d % 60000) / 1000);
+                    document.getElementById('main-countdown').innerText = toBn(`${h.toString().padStart(2,'0')}:${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`);
+                    document.getElementById('countdown-label').innerText = "রমজান শুরু হতে বাকি";
+                    document.getElementById('target-time-label').innerText = toBn(start.toLocaleTimeString('en-US', {hour:'2-digit', minute:'2-digit'}));
+                }
+            }
+        }
+
+        setInterval(refresh, 1000);
+        window.onload = refresh;
+    </script>
+</body>
+</html>
